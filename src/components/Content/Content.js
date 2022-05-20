@@ -65,7 +65,6 @@ const Content = () => {
           "text-wrap": "wrap",
           "text-max-width": 80,
           "text-valign": "center",
-          color: "#fff",
           "text-outline-color": "#18202C",
           width: 270,
           color: "white",

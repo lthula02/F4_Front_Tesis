@@ -6,7 +6,7 @@ import {
   postVersion,
   putVersion,
   deleteVersion,
-} from "../../api/versions/versions";
+} from "../../api/login/versions/versions";
 import { manageErrors } from "../errors/errors";
 
 /**
