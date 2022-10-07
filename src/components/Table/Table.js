@@ -7,6 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import MenuIcon from "@material-ui/icons/Menu";
+import "./table.css"
 
 import TableItem from "../TableItem/TableItem";
 
@@ -94,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
       "0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)",
 
     width: '60%',
+    height: '100%',
   },
   drawerHeader: {
     height: 40,

@@ -1,0 +1,129 @@
+.form-styles {
+    display: flex;
+}
+
+.input {
+    display: flex;
+    margin: 1rem 0.5rem;
+}
+
+.input-styles {
+    border-bottom: 1px solid #000;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    width: 140px;
+}
+
+.input-styles:focus {
+    border-bottom: 2px solid #3f51b5;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+}
+
+.input-label:focus-within {
+    color: #3f51b5;
+}
+
+.input-align {
+    margin-right: 1rem;
+    position: relative;
+    width: 140px;
+    height: 40px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.input-label {
+    font-size: 10px;
+}
+
+.input-align-umbral {
+    margin-right: 1rem;
+    position: relative;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.input-styles-umbral {
+    border-bottom: 1px solid #000;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    width: 80px;
+}
+
+.input-styles-umbral:focus {
+    border-bottom: 2px solid #3f51b5;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+}
+
+.input-errors-umbral {
+    border-bottom: 2px solid red;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    width: 80px;
+}
+
+.input-errors {
+    border-bottom: 2px solid red;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    width: 140px;
+}
+
+.input-errors:focus {
+    outline: none;
+}
+
+
+.validation-text {
+    color: red;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+input:focus+label {
+   color: #3f51b5;
+}
+
+.btn-total {
+    align-items: center;
+    display: flex;
+}
+
+.btn-total button {
+    border: #3f51b5 solid 2px !important;
+    background: #3f51b5 !important;
+    color: #fff !important;
+    font-weight: bold !important;
+}
+
+.btn-total button:hover {
+    background: #273060 !important;
+    border: #273060 solid 2px !important;
+}
+
+.total-sum {
+    display: flex;
+    justify-content: center;
+}
+
+.total-sum p {
+    font-size: 20px;
+
+}
+
+.total-sum span {
+    font-weight: 600;
+
+}
