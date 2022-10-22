@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { putMetrics } from "../../api/metrics/metrics.js";
+import { putMetrics, combineMetrics } from "../../api/metrics/metrics.js";
 
 import AppContext from "../../auth/context/context.js"
 import { ModalMessage } from "../../components/ModalMessage/ModalMessage";
@@ -7,15 +7,14 @@ import { ModalMessage } from "../../components/ModalMessage/ModalMessage";
 
 
 
-const ManageMetrics = async (user, selectedProject, umbralName) => {  
+const ManageMetrics = async (user, selectedProject, umbralName) => {
     // setReloadSidebar(true);
-    console.log("UMBRAL NAME1: " + umbralName)
-    await putMetrics(user,
+        await putMetrics(user,
         selectedProject.projectIndex,
         selectedProject.arcIndex,
         selectedProject.verIndex,
         umbralName);
-    
+
       // ModalMessage(
       //   "¡Metricas calculadas con exito!",
       //   " ",
@@ -26,4 +25,14 @@ const ManageMetrics = async (user, selectedProject, umbralName) => {
     //window.location.reload()
   };
 
-  export { ManageMetrics };
+
+  const ManageCombineMetrics = async (user, selectedProject, weighing) => {
+    await combineMetrics(
+      user,
+      selectedProject.projectIndex,
+      selectedProject.arcIndex,
+      selectedProject.verIndex,
+      weighing
+    );
+  }
+  export { ManageMetrics, ManageCombineMetrics };
