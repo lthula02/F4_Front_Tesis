@@ -78,7 +78,32 @@ const combineMetrics = async (user, projectIndex, arcIndex, verIndex, weighing) 
   }
 }
 
+const compositeComponets = async(
+  user,
+  projectIndex,
+  arcIndex,
+  verIndex,
+  umbral_q
+) => {
+  const create_composite_component = {
+    user_id: user.uid,
+    project_index: projectIndex,
+    arch_index: arcIndex,
+    ver_index: verIndex,
+    umbral_q
+}
+ try {
+    const res = await axios.put('/composite-component/', {
+      data: create_composite_component,
+    });
+    console.log(res)
+    console.log(res.data)
+    return res.data
+  }catch (err){
+    return err.res.status
+  };
+}
 
 export {
-    putMetrics, combineMetrics
+    putMetrics, combineMetrics, compositeComponets
 }

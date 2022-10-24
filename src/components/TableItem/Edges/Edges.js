@@ -2,7 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 // import { putMetrics } from "../../../api/metrics/metrics";
 
-import { ManageMetrics, ManageCombineMetrics } from "../../../helpers/metrics/metrics"
+import {
+  ManageMetrics,
+  ManageCombineMetrics,
+  ManageCreateCompositeComponent,
+} from '../../../helpers/metrics/metrics';
 
 import AppContext from "../../../auth/context/context";
 import Loader from "../../Loader/Loader";
@@ -10,6 +14,7 @@ import nodeHelper from "../../../helpers/nodes/nodes";
 import "./inputs.css";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Button } from "@material-ui/core";
+import { manageElementsUpdate } from '../../../helpers/elements/elements';
 
 /**
  * Componente que representa
@@ -18,23 +23,26 @@ import { Button } from "@material-ui/core";
 
 
 const EdgesTable = () => {
-  const { user, selectedProject, elements/*setReloadSidebar*/ } = useContext(AppContext);
+  const { user, selectedProject, setSelectedProject, elements/*setReloadSidebar*/ } = useContext(AppContext);
   const [loader, setLoader] = useState(true);
 
   const columns1 = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "source", headerName: "Origen", width: 300 },
-    { field: "target", headerName: "Destino", width: 300 },
-    { field: "relation", headerName: "Relación", width: 200 },
-    { field: "coupling", headerName: "Coupling", width: 200 },
-    { field: "abstractness", headerName: "Abstracción", width: 200 },
-    { field: "instability", headerName: "Inestabilidad", width: 200 },
-    { field: "dms", headerName: "DMS", width: 200 },
-    { field: "nameRessemblance", headerName: "Semejanza de Nombre", width: 200 },
-    { field: "packageMapping", headerName: "Mapeo de Paquetes", width: 200 },
-    { field: "q", headerName: "Q", width: 250 },
-    { field: "answer", headerName: "Candidato a Compuesto?", width: 250 },
-
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'source', headerName: 'Origen', width: 180 },
+    { field: 'target', headerName: 'Destino', width: 180 },
+    { field: 'relation', headerName: 'Relación', width: 150 },
+    { field: 'coupling', headerName: 'Coupling', width: 150 },
+    { field: 'abstractness', headerName: 'Abstracción', width: 180 },
+    { field: 'instability', headerName: 'Inestabilidad', width: 180 },
+    { field: 'dms', headerName: 'DMS', width: 150 },
+    {
+      field: 'nameRessemblance',
+      headerName: 'Semejanza de Nombre',
+      width: 180,
+    },
+    { field: 'packageMapping', headerName: 'Mapeo de Paquetes', width: 180 },
+    { field: 'overall_q', headerName: 'Q', width: 100 },
+    // { field: 'answer', headerName: 'Candidato a Compuesto?', width: 250 },
   ];
 
   // Getting the values of each input fields
@@ -43,17 +51,18 @@ const EdgesTable = () => {
   const [packageMapping, setPackageMapping] = useState(25);
   const [umbralName, setUmbralName] = useState(40);
   const [umbralCoupling, setUmbralCoupling] = useState(65);
-  const [umbral, setUmbral] = useState(0.4);
+  const [umbral, setUmbral] = useState(0.01);
   // const [sum, setSum] = useState(dms + nameResemblance + packageMapping);
   // let total = (dms + nameResemblance + packageMapping)
   const [sum, setSum] = useState(0);
   const [total, setTotal] = useState(0);
   const [weighing, setWeighing ] = useState({
-    dms: 0,
-    coupling: 0,
-    name_resemblance: 0,
-    package_mapping: 0
+    dms: dms,
+    coupling: umbralCoupling,
+    name_resemblance: nameResemblance,
+    package_mapping: packageMapping
   })
+  const [render, setRender] = useState(false)
 
 
 
@@ -79,97 +88,49 @@ const EdgesTable = () => {
   let edgesDos = nodeHelper.getRelationData(selectedProject);
 
   // For loop to get the Q and answer
-  function _calculateMetrics () {
-    if (sum <= 100) {
-      console.log(edgesDos)
-      console.log(nodesDos)
-      for (let i = 0; i < edgesDos.length; i++) {
-        let flag1 = false;
-        let flag2 = false;
-        let dividen1 = 0;
-        let dividen2 = 0;
-        // for (let j = 0; j < nodesDos.length; j++) {
-          // if (
-          //   nodesDos[j].id === edgesDos[i].source &&
-          //   nodesDos[j].incomompleteProperties
-          // ) {
-          //   flag1 = true;
-          //   edgesDos[i].q = 0;
-          //   edgesDos[i].answer = 'No Aplica';
-          // }
-          // if (
-          //   nodesDos[j].id === edgesDos[i].target &&
-          //   nodesDos[j].incomompleteProperties
-          // ) {
-          //   flag2 = true;
-          //   edgesDos[i].q = 0;
-          //   edgesDos[i].answer = 'No Aplica';
-          // }
-          // if (flag1 || flag2) {
-          //   break;
-          // }
-        // }
-        // if (!flag1 && !flag2) {
-          // console.log("partida " + edgesDos[i].source + "llegada " + edgesDos[i].target)
-          // console.log("Nombre: " +  edgesDos[i].nameRessemblance + " Mapeo " + edgesDos[i].packageMapping)
-
-          // if (edgesDos[i].coupling >= umbralCoupling) {
-          // }
-          let x1
-          for (let index = 1; index < 5; index++) {
-            // edgesDos[i].
-
-          }
-          dividen1 = edgesDos[i].nameRessemblance * (nameResemblance/100);
-
-          dividen1 = dividen1 + edgesDos[i].packageMapping * (packageMapping/100);
-          dividen2 = edgesDos[i].dms * (dms/100);
-
-          let q = (dividen1 - dividen2) / sum;
-          edgesDos[i].q = q.toFixed(2);
-
-          // if (q >= umbral) {
-          //   edgesDos[i].answer = 'Si';
-          // } else {
-          //   edgesDos[i].answer = 'No';
-          // }
-        // }
-        //  else {
-        //   edgesDos[i].q = 'Imposible Calcular';
-        //   edgesDos[i].answer = 'Imposible Concluir';
-        // }
-      }
-    }
+  function calculatelistas(){
+    ManageCreateCompositeComponent(user, selectedProject, umbral);
   }
-  async function combineMetrics() {
-    const _weighing =setWeighing({
-      dms: dms,
-      coupling: umbralCoupling,
-      name_resemblance: nameResemblance,
-      package_mapping: packageMapping,
-    });
-    const q = await ManageCombineMetrics(user, selectedProject, _weighing);
-    for (const e in edgesDos) {
-      console.log(e)
-      edgesDos[e].q = q[e]
-    }
+
+  async function combineMetrics(setRender, render) {
+    const q = await ManageCombineMetrics(user, selectedProject, weighing);
+    console.log(q)
+    setRender(!render);
+    // for (const e in edgesDos) {
+    //   console.log(e)
+    //   edgesDos[e].q = q[e]
+    // }
+    return q
   }
 
   useEffect(() => {
     setLoader(false);
   }, [selectedProject.elements]);
 
+  useEffect(()=>{
+    console.log("ENTRO RENDER")
+    manageElementsUpdate(
+      user,
+      selectedProject,
+      setSelectedProject,
+    );
+    console.log("selectedProject.elements.edges")
+    console.log(selectedProject.elements.edges);
+    edgesDos = nodeHelper.getRelationData(selectedProject);
+    console.log("edgesDos STATE")
+    console.log(edgesDos);
+  },[render])
+
   useEffect(() => {
     console.log('Calculo de metricas')
-     const x = setWeighing({
+    setWeighing({
        dms: dms,
        coupling: umbralCoupling,
        name_resemblance: nameResemblance,
        package_mapping: packageMapping,
      });
-    console.log(x);
     return calculateTotal();
-  }, [dms, nameResemblance, packageMapping]);
+  }, [dms, nameResemblance, packageMapping, umbralCoupling]);
   // const [open, setOpen] = React.useState(false);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
@@ -198,6 +159,9 @@ const EdgesTable = () => {
           <div className="btn-total">
             <Button onClick={calculateTotal} variant="contained">
               Calcular
+            </Button>
+            <Button onClick={()=>calculatelistas()} variant="contained">
+              Calcular222
             </Button>
           </div>
         </form>
@@ -290,12 +254,16 @@ const EdgesTable = () => {
             </div>
           </div>
           <div>
-            <button onClick={() => combineMetrics()}>test</button>
+            <Button onClick={async () => {
+              await combineMetrics(setRender, render);
+              // console.log("edgesDos")
+              // console.log(edgesDos);
+              // setRender(!render)
+              }}>Diferente</Button>
           </div>
           <div className="btn-total">
             <Button
               onClick={() => {
-                _calculateMetrics();
                 ManageMetrics(user, selectedProject, umbralName);
               }}
             >

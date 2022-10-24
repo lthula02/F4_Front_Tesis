@@ -1,5 +1,9 @@
 import React, { useContext } from "react";
-import { putMetrics, combineMetrics } from "../../api/metrics/metrics.js";
+import {
+  putMetrics,
+  combineMetrics,
+  compositeComponets,
+} from '../../api/metrics/metrics.js';
 
 import AppContext from "../../auth/context/context.js"
 import { ModalMessage } from "../../components/ModalMessage/ModalMessage";
@@ -35,4 +39,15 @@ const ManageMetrics = async (user, selectedProject, umbralName) => {
       weighing
     );
   }
-  export { ManageMetrics, ManageCombineMetrics };
+
+  const ManageCreateCompositeComponent = async (user, selectedProject, umbral_q) => {
+    await compositeComponets (
+      user,
+      selectedProject.projectIndex,
+      selectedProject.arcIndex,
+      selectedProject.verIndex,
+      umbral_q
+    )
+  }
+
+  export { ManageMetrics, ManageCombineMetrics, ManageCreateCompositeComponent};
