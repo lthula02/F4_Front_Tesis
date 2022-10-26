@@ -1,12 +1,11 @@
 const firebaseConfig = {
-    apiKey: 'AIzaSyD_iwaJ6_uf6VwkGpISv4qkYTDUYgXInDE',
-    databaseURL: "https://test-tesis-dce1c-default-rtdb.firebaseio.com/",
-    authDomain: 'test-tesis-dce1c.firebaseapp.com',
-    projectId: 'test-tesis-dce1c',
-    storageBucket: 'test-tesis-dce1c.appspot.com',
-    messagingSenderId: '494731013904',
-    appId: '1:494731013904:web:a2a325d410eac17b47bf95',
-    measurementId: 'G-2MC7RNN4XK',
+  apiKey: 'AIzaSyDzkbejv-ROPrQHumLv3HUwh7XJR_32cYQ',
+  authDomain: 'cl-tesis-db.firebaseapp.com',
+  databaseURL: 'https://cl-tesis-db-default-rtdb.firebaseio.com',
+  projectId: 'cl-tesis-db',
+  storageBucket: 'cl-tesis-db.appspot.com',
+  messagingSenderId: '961596855851',
+  appId: '1:961596855851:web:e7b4da86e7e36f06ce3c6e',
 };
 
 export default firebaseConfig;
