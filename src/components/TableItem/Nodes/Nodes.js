@@ -7,7 +7,7 @@ import Loader from "../../Loader/Loader";
 import nodeHelper from "../../../helpers/nodes/nodes";
 
 /**
- * Componente que representa 
+ * Componente que representa
  * la tabla de nodos del proyecto selecionado
  */
 const NodesTable = () => {
@@ -20,19 +20,21 @@ const NodesTable = () => {
   let [loader, setLoader] = useState(true);
 
   let rows = selectedProject.elements.nodes.map(node => {
-    return { id: node.data.id, name: node.data.name, 
-             isInterface: !node.data.incomompleteProperties ? node.data.isInterface ? 'Si' : 'No' : '-', 
-             isAbtsract: node.data.hasOwnProperty('isAbstract') ? node.data.isAbtsract ? 'Si' : 'No' : '-', 
-             module: node.data.hasOwnProperty('module') ? node.data.module : "-", 
-             incomompleteProperties: node.data.incomompleteProperties ? "No" : "Si" };
+    return { id: node.data.id, name: node.data.name,
+             isInterface: !node.data.incomompleteProperties ? node.data.isInterface ? 'Si' : 'No' : '-',
+             isAbtsract: node.data.hasOwnProperty('isAbstract') ? node.data.isAbtsract ? 'Si' : 'No' : '-',
+             module: node.data.hasOwnProperty('module') ? node.data.module : "-",
+             incomompleteProperties: node.data.incomompleteProperties ? "No" : "Si",
+            composite:node.data.hasOwnProperty('composite') ? node.data.composite : "-" };
   });
 
   const columns = [
-    { field: "name", headerName: "Nombre", width: 400 },
-    { field: "isInterface", headerName: "Es Interfaz?", width: 150 },
-    { field: "isAbtsract", headerName: "Es Abstracto?", width: 150 },
-    { field: "module", headerName: "Modulo", width: 150 },
-    { field: "incomompleteProperties", headerName: "Propiedades Completas", width: 250 },
+    { field: "name", headerName: "Nombre", width: 230 },
+    { field: "isInterface", headerName: "Es Interfaz?", width: 160 },
+    { field: "isAbtsract", headerName: "Es Abstracto?", width: 165 },
+    { field: "module", headerName: "Modulo", width: 130 },
+    { field: "incomompleteProperties", headerName: "Propiedades Completas", width: 230 },
+    { field: "composite", headerName: "Componente Compuesto", width: 235 },
   ];
 
 

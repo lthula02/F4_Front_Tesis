@@ -217,6 +217,7 @@ const getNodeData = (selectedProject) => {
     name: node.data.name,
     module: node.data.module,
     incomompleteProperties: node.data.incomompleteProperties,
+    composite: node.data.composite ?? '-',
   }));
 };
 
