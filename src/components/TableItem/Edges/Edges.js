@@ -215,7 +215,7 @@ const EdgesTable = () => {
                 await calculatelistas();
               }}
             >
-              Diferente
+              Unir Componentes
             </Button>
           </div>
         </form>
