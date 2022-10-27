@@ -8,8 +8,8 @@ import Switch from "@material-ui/core/Switch";
 
 import AppContext from "../../auth/context/context";
 import CytoscapeComponent from "react-cytoscapejs";
-import cytoscape from 'cytoscape';
-import cise from 'cytoscape-cise';
+// import cytoscape from 'cytoscape';
+// import cise from 'cytoscape-cise';
 import Loader from "../Loader/Loader";
 import nodesHelper from "../../helpers/nodes/nodes";
 
@@ -18,7 +18,7 @@ import nodesHelper from "../../helpers/nodes/nodes";
  * de la arquitectura seleccionada
  */
 const Content = () => {
-  cytoscape.use( cise );
+  // cytoscape.use( cise );
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [elementos, setElementos] = useState();
@@ -210,22 +210,21 @@ const Content = () => {
     }
   }, [checked, cy]);
 
-  useEffect(() => {
-    console.log("ENTRO")
-    if (composite) {
-      let composite_components = []
-      elementos.list_t.map((item) => {
-        composite_components.push(item.composite_component);
-      });
-      setListT(composite_components);
-      setComposite2(true)
-    }
-  }, [composite]);
+  // useEffect(() => {
+  //   console.log("ENTRO")
+  //   if (composite) {
+  //     let composite_components = []
+  //     elementos.list_t.map((item) => {
+  //       composite_components.push(item.composite_component);
+  //     });
+  //     setListT(composite_components);
+  //     setComposite2(true)
+  //   }
+  // }, [composite]);
 
   useEffect(()=>{
-    console.log("LISTTTTTTTTTTTTTTTT")
-    console.log(listT);
-  },[listT])
+
+  },[composite])
 
   useEffect(() => {
     setLoad(true);
@@ -243,7 +242,7 @@ const Content = () => {
     <>
       {load ? (
         <Loader />
-      ) : elementos && !composite2 ? (
+      ) : elementos ? (
         <div>
           <div className={classes.onClose}>
             <FormControlLabel
@@ -273,21 +272,23 @@ const Content = () => {
             zoom={0.5}
           />
         </div>
-      ) : elementos && composite2 ? (
-        <CytoscapeComponent
-            className="component"
-            cy={(cyt) => {
-              setCy(cyt);
-            }}
-            elements={CytoscapeComponent.normalizeElements(elementos)}
-            id="component"
-            layout={state.layout2}
-            maxZoom={2}
-            pan={{ x: 150, y: 30 }}
-            stylesheet={state.stylesheet2}
-            zoom={0.5}
-          />
-      ) : null }
+      )
+      // : elementos && composite2 ? (
+      //   <CytoscapeComponent
+      //       className="component"
+      //       cy={(cyt) => {
+      //         setCy(cyt);
+      //       }}
+      //       elements={CytoscapeComponent.normalizeElements(elementos)}
+      //       id="component"
+      //       layout={state.layout2}
+      //       maxZoom={2}
+      //       pan={{ x: 150, y: 30 }}
+      //       stylesheet={state.stylesheet2}
+      //       zoom={0.5}
+      //     />
+      // )
+      : null }
     </>
   );
 };
