@@ -157,7 +157,7 @@ const EdgesTable = () => {
               <input
                 className="input-styles-umbral"
                 placeholder="ejm. 0.45"
-                name="umbral"
+                name="umbralS"
                 value={umbralName}
                 type="text"
                 onChange={(e) => {
@@ -171,7 +171,7 @@ const EdgesTable = () => {
               <input
                 className="input-styles-umbral"
                 placeholder="ejm. 0.65"
-                name="umbral"
+                name="umbralA"
                 value={umbralCoupling}
                 type="text"
                 onChange={(e) => {
@@ -185,9 +185,9 @@ const EdgesTable = () => {
               <input
                 className="input-styles-umbral"
                 placeholder="Umbral"
-                name="umbral"
+                name="umbralQ"
                 value={umbral}
-                type="text"
+                type="number"
                 onChange={(e) => {
                   e.preventDefault();
                   setUmbral(Number(e.target.value));
