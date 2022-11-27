@@ -115,6 +115,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     width: "auto",
+    zIndex: -1
   },
   inputs: {
     padding: theme.spacing(2),

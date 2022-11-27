@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/EditOutlined';
-
+import Swal from "sweetalert2";
 
 import AppContext from "../../../auth/context/context";
 import Loader from "../../Loader/Loader";
@@ -67,15 +67,48 @@ const NodesTable = () => {
 
     const api = params.api;
     const thisRow = {};
+    let name = ""
 
     api
       .getAllColumns()
       .filter((c) => c.field !== '__check__' && !!c)
-      .forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
+      .forEach((c) => {thisRow[c.field] = params.getValue(params.id, c.field)
+        console.log(c.field);
+        if(c.field == "composite"){
+          name = params.getValue(params.id, c.field);
+        }}
+      );
 
-    return alert(JSON.stringify(thisRow, null, 4));
-    //TODO (EDIT CASE) LLAMAR A LA FUNCION QUE RECIBA LOS DATOS (thisRow) Y MUESTRE UN MODAL DONDE DEJE EDITAR LAS RELACIONES
-    //TODO (DELETE CASE) LLAMAR A LA FUNCION QUE RECIBA LOS DATOS (thisRow) AGARRE EL ID Y BORRE ESE NODO Y QUITE LAS RELACIONES SALIENTES QUE TENÍA
+     return Swal.fire({
+       title:
+         'Inserte nombre del componente compuesto ' + name,
+       input: 'text',
+       inputAttributes: {
+         autocapitalize: 'off',
+       },
+       showCancelButton: true,
+       confirmButtonText: 'Guardar',
+       showLoaderOnConfirm: true,
+       preConfirm: (compositeComponent) => {
+         //TODO: TERMINAR ESTO
+         // return fetch(`//api.github.com/users/${login}`)
+         //   .then((response) => {
+         //     if (!response.ok) {
+         //       throw new Error(response.statusText);
+         //     }
+         //     return response.json();
+         //   })
+         //   .catch((error) => {
+         //     Swal.showValidationMessage(`Request failed: ${error}`);
+         //   });
+         return true;
+       },
+       allowOutsideClick: () => !Swal.isLoading(),
+     }).then((result) => {
+       if (result) {
+         Swal.fire('Cambiado con éxito!', '', 'success');
+       }
+     });
   };
 
 
@@ -89,7 +122,7 @@ const NodesTable = () => {
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSize={10}
+          pageSize={50}
           checkboxSelection
           onCellClick={params => {
             nodeHelper.manageCellClick(params.row.name, selectedNodes, setSelectedNodes, cy, setSelectionModel);

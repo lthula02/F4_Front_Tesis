@@ -251,7 +251,11 @@ const EdgesTable = () => {
         </Alert>
       )} */}
       {!loader ? (
-        <DataGrid rows={edgesDos} columns={columns1} pageSize={10} />
+        <DataGrid
+          rows={edgesDos}
+          columns={columns1}
+          pageSize={50}
+        />
       ) : (
         <Loader />
       )}
