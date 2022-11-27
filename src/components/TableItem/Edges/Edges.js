@@ -48,7 +48,7 @@ const EdgesTable = () => {
   const [nameResemblance, setNameResemblance] = useState(35);
   const [packageMapping, setPackageMapping] = useState(25);
   const [umbralName, setUmbralName] = useState(40);
-  const [umbralCoupling, setUmbralCoupling] = useState(45);
+  const [umbralCoupling, setUmbralCoupling] = useState(0.45);
   const [umbral, setUmbral] = useState(-0.1);
   const [total, setTotal] = useState(0);
   const [weighing, setWeighing ] = useState({
@@ -158,6 +158,20 @@ const EdgesTable = () => {
                 className="input-styles-umbral"
                 placeholder="ejm. 0.45"
                 name="umbralS"
+                value={nameResemblance}
+                type="text"
+                onChange={(e) => {
+                  e.preventDefault();
+                  setNameResemblance(Number(e.target.value));
+                }}
+              />
+              <label className="input-label">Peso Semejanza de Nombre</label>
+            </div>
+            <div className="input-align-umbral">
+              <input
+                className="input-styles-umbral"
+                placeholder="ejm. 0.45"
+                name="umbralS"
                 value={umbralName}
                 type="text"
                 onChange={(e) => {
@@ -202,14 +216,14 @@ const EdgesTable = () => {
               onClick={async () => {
                 calculateTotal();
                 await ManageMetrics(user, selectedProject, umbralName);
-                setEnable(false)
+                setEnable(false);
               }}
             >
               Calcular Metricas
             </Button>
             <Button
               className="btn-total"
-              disabled= {enable}
+              disabled={enable}
               onClick={async () => {
                 await combineMetrics(setRender, render);
                 await calculatelistas();
