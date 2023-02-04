@@ -55,7 +55,7 @@ function a11yProps(index) {
  * al contenedor de las tablas
  * para manejo de nodos y aristas
  */
-const TableItem = () => {
+const TableItem = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
@@ -95,12 +95,12 @@ const TableItem = () => {
         </Tabs>
       </AppBar>
       <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <NodesTable />
+          <NodesTable closeDrawable={(value) => props.closeDrawable(value)}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <EdgesTable />

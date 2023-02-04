@@ -41,7 +41,7 @@ const putMetrics = async (user, projectIndex, arcIndex, verIndex, name_ressembla
          ver_index: verIndex,
          name_ressemblance_umbral: name_ressemblance_umbral,
    }
-
+   console.log('Metricass', putMetrics)
    const token = jwt(putMetrics, 'secret');
 
     try {

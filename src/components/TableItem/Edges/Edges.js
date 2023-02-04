@@ -24,6 +24,8 @@ import { manageElementsUpdate } from '../../../helpers/elements/elements';
 const EdgesTable = () => {
   const { user, selectedProject, setSelectedProject, setComposite, /* elements setReloadSidebar*/ } = useContext(AppContext);
   const [loader, setLoader] = useState(true);
+  const [loadingMetrics, setLoadingMetrics] = useState(false);
+  const [loadingComponents, setLoadingComponents] = useState(false);
 
   const columns1 = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -121,7 +123,7 @@ const EdgesTable = () => {
 
 
   return (
-    <div style={{ height: '80vh', width: '100%' }}>
+    <div style={{ height: '80vh', width: '100%', overflow: 'scroll' }}>
       <div className="form-wrapper">
         <form className="form-styles">
           <div className="input">
@@ -211,26 +213,39 @@ const EdgesTable = () => {
             </div>
           </div>
           <div className="buttons">
-            <Button
-              className="btn-total"
-              onClick={async () => {
-                calculateTotal();
-                await ManageMetrics(user, selectedProject, umbralName);
-                setEnable(false);
-              }}
-            >
-              Calcular Metricas
-            </Button>
-            <Button
-              className="btn-total"
-              disabled={enable}
-              onClick={async () => {
-                await combineMetrics(setRender, render);
-                await calculatelistas();
-              }}
-            >
-              Unir Componentes
-            </Button>
+            {!loadingMetrics ? (
+              <Button
+                className="btn-total"
+                onClick={async () => {
+                  setLoadingMetrics(true);
+                  calculateTotal();
+                  await ManageMetrics(user, selectedProject, umbralName);
+                  setEnable(false);
+                  setLoadingMetrics(false);
+                }}
+              >
+                Calcular Metricas
+              </Button>
+            ) : (
+              <Loader />
+            )}
+            {!loadingComponents ? (
+              <Button
+                className="btn-total"
+                disabled={enable}
+                onClick={async () => {
+                  setLoadingComponents(true);
+                  await combineMetrics(setRender, render);
+                  await calculatelistas();
+                  setEnable(true);
+                  setLoadingComponents(false);
+                }}
+              >
+                Unir Componentes
+              </Button>
+            ) : (
+              <Loader />
+            )}
           </div>
         </form>
       </div>
@@ -251,11 +266,7 @@ const EdgesTable = () => {
         </Alert>
       )} */}
       {!loader ? (
-        <DataGrid
-          rows={edgesDos}
-          columns={columns1}
-          pageSize={50}
-        />
+        <DataGrid rows={edgesDos} columns={columns1} pageSize={50} />
       ) : (
         <Loader />
       )}
