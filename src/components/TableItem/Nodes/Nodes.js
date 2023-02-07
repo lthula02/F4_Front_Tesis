@@ -49,7 +49,7 @@ const NodesTable = (props) => {
     { field: 'composite', headerName: 'Componente Compuesto', width: 235 },
     {
       field: 'action',
-      headerName: 'Acción',
+      headerName: 'Cambiar Nombre del Componente Compuesto / Cambiar el Nodo de Componente Compuesto',
       sortable: false,
       width: 150,
       renderCell: (params) => {
