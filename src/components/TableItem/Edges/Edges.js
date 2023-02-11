@@ -14,6 +14,7 @@ import "./inputs.css";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Button } from "@material-ui/core";
 import { manageElementsUpdate } from '../../../helpers/elements/elements';
+import axios from "axios";
 
 /**
  * Componente que representa
@@ -237,6 +238,15 @@ const EdgesTable = () => {
                   setLoadingComponents(true);
                   await combineMetrics(setRender, render);
                   await calculatelistas();
+                  await axios.put('/create_cc_board/', {
+                   data: {
+                    user_id: user.uid,
+                    project_index: selectedProject.projectIndex,
+                    arch_index: selectedProject.arcIndex,
+                    ver_index: selectedProject.verIndex,
+                   }
+
+                  });
                   setEnable(true);
                   setLoadingComponents(false);
                 }}

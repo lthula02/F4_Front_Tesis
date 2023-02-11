@@ -11,6 +11,7 @@ import Tabs from "@material-ui/core/Tabs";
 
 import EdgesTable from "./Edges/Edges";
 import NodesTable from "./Nodes/Nodes";
+import CompositeComponentTable from './CompositeComponent/CompositeComponent';
 import { TextField } from "@material-ui/core";
 
 /**
@@ -92,6 +93,7 @@ const TableItem = (props) => {
         >
           <Tab label="Nodos" {...a11yProps(0)} />
           <Tab label="Relaciones" {...a11yProps(1)} />
+          <Tab label="Componentes Compuestos" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -100,10 +102,15 @@ const TableItem = (props) => {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <NodesTable closeDrawable={(value) => props.closeDrawable(value)}/>
+          <NodesTable closeDrawable={(value) => props.closeDrawable(value)} />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <EdgesTable />
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          <CompositeComponentTable
+            closeDrawable={(value) => props.closeDrawable(value)}
+          />
         </TabPanel>
       </SwipeableViews>
     </div>
