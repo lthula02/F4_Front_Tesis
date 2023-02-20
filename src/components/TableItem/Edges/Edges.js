@@ -33,6 +33,7 @@ const EdgesTable = () => {
     { field: 'source', headerName: 'Origen', width: 180 },
     { field: 'target', headerName: 'Destino', width: 180 },
     { field: 'relation', headerName: 'Relación', width: 150 },
+    { field: 'index', headerName: 'Indice', width: 150 },
     { field: 'coupling', headerName: 'Coupling', width: 150 },
     { field: 'abstractness', headerName: 'Abstracción', width: 180 },
     { field: 'instability', headerName: 'Inestabilidad', width: 180 },
