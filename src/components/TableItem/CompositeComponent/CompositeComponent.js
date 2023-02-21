@@ -51,7 +51,10 @@ const CompositeComponentTable = (props) => {
     return {
       id: index,
       name: list.name ? list.name : '-',
-      nodes: list.composite_component ? list.composite_component.join(" ") : '-',
+      color: list.bg ? list.bg : '-',
+      nodes: list.composite_component
+        ? list.composite_component.join(' ')
+        : '-',
       required_interface: list.required_interfaces
         ? list.required_interfaces
         : '-',
@@ -64,6 +67,20 @@ const CompositeComponentTable = (props) => {
 
   const columns = [
     { field: 'name', headerName: 'Nombre', width: 98 },
+    {
+      field: 'color',
+      headerName: 'Color',
+      width: 98,
+      renderCell: (params) => {
+        return (
+          <>
+            <Button
+              style={{ backgroundColor: params.getValue(params.id, 'color') }}
+            />
+          </>
+        );
+      },
+    },
     { field: 'nodes', headerName: 'Nodos', width: 200 },
     {
       field: 'required_interface',
