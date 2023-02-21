@@ -35,13 +35,14 @@ const removeNode = (
   selectedNodes,
   setSelectedNodes,
   cy,
-  setSelectionModel
+  setSelectionModel,
+  color
 ) => {
   const temp = selectedNodes;
   temp.delete(id);
   setSelectedNodes(temp);
   setSelectionModel([...temp]);
-  changeNodeColor(cy, id, "remove");
+  changeNodeColor(cy, id, "remove", color);
   const edges = getEdges(cy, id);
   changeEdgesColor(cy, edges, "remove");
 };
@@ -78,8 +79,8 @@ const manageCellClick = (
  * @param {String} nodeId ID del nodo
  * @param {String} type Selección/Deselección del nodo
  */
-const changeNodeColor = (cy, nodeId, type) => {
-  const backgroundColor = type === "remove" ? "#18202C" : "#ffc74d";
+const changeNodeColor = (cy, nodeId, type, color) => {
+  const backgroundColor = type === "remove" ? color : "#ffc74d";
   cy.getElementById(nodeId).animate(
     {
       style: {

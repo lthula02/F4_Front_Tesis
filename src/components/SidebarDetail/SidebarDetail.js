@@ -14,7 +14,7 @@ import AppContext from "../../auth/context/context";
  * Componente que representa el contenido
  * del item añadido como proyecto en la barra lateral
  */
-const SidebarDetail = ({ projectIndex, item }) => {
+const SidebarDetail = ({ projectIndex, item, setShowUml }) => {
   const classes = useStyles();
   const { selectedProject, setSelectedProject } = useContext(AppContext);
 
@@ -29,14 +29,15 @@ const SidebarDetail = ({ projectIndex, item }) => {
   const handleSelect = (nodeName, arqIndex, verIndex, elems, length) => {
     if (nodeName !== selectedProject) {
       Swal.fire({
-        text: "¿Deseas mostrar " + nodeName + "?",
-        icon: "warning",
+        text: '¿Deseas mostrar ' + nodeName + '?',
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "var(--success)",
-        cancelButtonColor: "var(--error)",
-        confirmButtonText: "Si, seguro",
+        confirmButtonColor: 'var(--success)',
+        cancelButtonColor: 'var(--error)',
+        confirmButtonText: 'Si, seguro',
       }).then((result) => {
         if (result.isConfirmed) {
+          setShowUml(false)
           const ver_index = parseInt(verIndex.charAt(verIndex.length - 1));
           setSelectedProject({
             versionName: nodeName,
@@ -44,7 +45,7 @@ const SidebarDetail = ({ projectIndex, item }) => {
             arcIndex: arqIndex,
             verIndex: ver_index,
             elements: elems,
-            versions: length
+            versions: length,
           });
         }
       });
@@ -71,12 +72,17 @@ const SidebarDetail = ({ projectIndex, item }) => {
       }
     >
       {Array.isArray(nodes.versions)
-        ? nodes.versions.map((node, index) =>
-            {
-              const ver_index = arqIndex + ":" + index;
-              return renderTree(node, true, arqIndex, ver_index , node.elements, length)
-            }
-          )
+        ? nodes.versions.map((node, index) => {
+            const ver_index = arqIndex + ':' + index;
+            return renderTree(
+              node,
+              true,
+              arqIndex,
+              ver_index,
+              node.elements,
+              length
+            );
+          })
         : null}
     </TreeItem>
   );
@@ -90,10 +96,17 @@ const SidebarDetail = ({ projectIndex, item }) => {
       >
         {item.architectures ? (
           item.architectures.map((architecture, index) =>
-            renderTree(architecture, false, index, null, null, architecture.versions.length)
+            renderTree(
+              architecture,
+              false,
+              index,
+              null,
+              null,
+              architecture.versions.length
+            )
           )
         ) : (
-          <h3 style={{ textAlign: "justify" }}>
+          <h3 style={{ textAlign: 'justify' }}>
             Este proyecto no tiene arquitecturas
           </h3>
         )}

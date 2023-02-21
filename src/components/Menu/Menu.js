@@ -21,7 +21,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
  * menu popup para manejo de
  * arquitecturas y proyectos
  */
-const StyledMenu = ({ item, projectIndex, setOpen }) => {
+const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
   const { user, setSelectedProject, setReloadSidebar } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
@@ -49,7 +49,7 @@ const StyledMenu = ({ item, projectIndex, setOpen }) => {
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
-        style={{ transform: "rotate(90deg)" }}
+        style={{ transform: 'rotate(90deg)' }}
         onClick={handleClick}
       >
         <MoreVertIcon />
@@ -103,6 +103,16 @@ const StyledMenu = ({ item, projectIndex, setOpen }) => {
           }}
         >
           Eliminar Arquitectura
+        </MenuItem>
+        <Divider className="dividerMenu" />
+        <MenuItem
+          disabled={item.architectures ? false : true}
+          onClick={() => {
+            setShowUml(true);
+            handleClose();
+          }}
+        >
+          Mostrar diagrama UML
         </MenuItem>
         <Divider className="dividerMenu" />
         <MenuItem

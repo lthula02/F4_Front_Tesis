@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import AppContext from "../../auth/context/context";
 import { googleAuth } from "../../firebase/googleAuth";
 import { postLogin } from "../../api/login/login";
+import UML from '../../components/UML/UML';
 
 /** Componente que representa la página
  *  principal de navegación
@@ -23,6 +24,7 @@ function Home() {
   const [drawerItems, setDrawerItems] = useState();
   const [open, setOpen] = useState(true);
   const [load, setLoad] = useState(true);
+  const [showUml, setShowUml] = useState(false);
   const {
     user,
     setUser,
@@ -103,6 +105,7 @@ function Home() {
         loader={load}
         open={open}
         setOpen={setOpen}
+        setShowUml={(value) => setShowUml(value)}
       />
       <main
         className={clsx(classes.content, {
@@ -111,7 +114,11 @@ function Home() {
       >
         {selectedProject ? (
           <div>
+            {showUml ?
+            <UML setShowUml={(value)=> setShowUml(value)}/>
+            :
             <Content />
+            }
             <Table />
           </div>
         ) : null}

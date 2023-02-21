@@ -15,7 +15,7 @@ import SidebarDetail from "../SidebarDetail/SidebarDetail";
 /** Componente que representa el item proyecto
  *  a ser añadido en el componente Sidebar
  */
-const SidebarItem = ({ item, projectIndex }) => {
+const SidebarItem = ({ item, projectIndex, setShowUml }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -30,9 +30,18 @@ const SidebarItem = ({ item, projectIndex }) => {
         >
           <Typography style={{ minWidth: 151 }}>{item.name}</Typography>
         </AccordionSummary>
-        <SidebarDetail item={item} projectIndex={projectIndex} />
+        <SidebarDetail
+          item={item}
+          projectIndex={projectIndex}
+          setShowUml={(value) => setShowUml(value)}
+        />
         <AccordionActions>
-          <Menu item={item} projectIndex={projectIndex} setOpen={setOpen} />
+          <Menu
+            item={item}
+            projectIndex={projectIndex}
+            setOpen={setOpen}
+            setShowUml={(value) => setShowUml(value)}
+        />
         </AccordionActions>
       </Accordion>
       {open ? (
@@ -40,7 +49,7 @@ const SidebarItem = ({ item, projectIndex }) => {
           open={open}
           onClose={() => setOpen(false)}
           projectIndex={projectIndex}
-          type={"Arquitectura"}
+          type={'Arquitectura'}
         />
       ) : null}
     </div>

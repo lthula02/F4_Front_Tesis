@@ -18,7 +18,15 @@ import SidebarItem from "../SidebarItem/SidebarItem";
  * Componente que representa la barra lateral
  * princial de navegacion
  */
-const Sidebar = ({ loader, login, logout, items, open, setOpen }) => {
+const Sidebar = ({
+  loader,
+  login,
+  logout,
+  items,
+  open,
+  setOpen,
+  setShowUml,
+}) => {
   const classes = useStyles();
   const { user } = useContext(AppContext);
 
@@ -39,6 +47,7 @@ const Sidebar = ({ loader, login, logout, items, open, setOpen }) => {
                   key={item.name}
                   item={item}
                   projectIndex={index}
+                  setShowUml={(value) => setShowUml(value)}
                 />
               );
             })}

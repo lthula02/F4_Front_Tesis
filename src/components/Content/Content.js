@@ -185,12 +185,14 @@ const Content = () => {
    */
   const unselectNodeHandler = (evt) => {
     const nodeId = evt["target"]["_private"]["data"].id;
+    const color = evt['target']['_private']['data'].bg;
     nodesHelper.removeNode(
       nodeId,
       selectedNodes,
       setSelectedNodes,
       cy,
-      setSelectionModel
+      setSelectionModel,
+      color
     );
     nodesHelper.repaintEdges(selectedNodes, cy);
   };
