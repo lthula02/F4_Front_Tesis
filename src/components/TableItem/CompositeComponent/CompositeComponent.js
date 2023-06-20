@@ -102,12 +102,12 @@ const CompositeComponentTable = (props) => {
         },
         {
             field: "description",
-            headerName: "Descripción",
+            headerName: "Aspecto",
             width: 150,
         },
         {
             field: "action",
-            headerName: "Cambiar descripción de Componente Compuesto",
+            headerName: "Cambiar nombre del aspecto",
             sortable: false,
             width: 150,
             renderCell: (params) => {
