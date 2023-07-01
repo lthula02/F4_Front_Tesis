@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../../auth/context/context";
 import {
     manageEditProject,
@@ -9,7 +9,7 @@ import {
     manageEditArchitecture,
     manageDeleteArchitecture,
 } from "../../helpers/architecture/architecture";
-import { handleShowVariability } from "../../helpers/variability/variability";
+import Variability from "../Variability/Variability";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
@@ -26,6 +26,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
         useContext(AppContext);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const openMenu = Boolean(anchorEl);
+    //const [showVarComponent, setShowVarComponent] = useState(false);
 
     /**
      * Manejador de click sobre icon
@@ -43,6 +44,10 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    /*const handleVarClick = () => {
+        setShowVarComponent(true);
+    };*/
 
     return (
         <>
@@ -117,7 +122,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        handleShowVariability();
+                        Variability(user, setSelectedProject);
                         handleClose();
                     }}
                 >
