@@ -1,27 +1,22 @@
-import React, { useContext, useEffect } from "react";
-import AppContext from "../../auth/context/context";
 import axios from "axios";
-import { dividerClasses } from "@mui/material";
 
-function Variability(user, selectedProject) {
-    //const { user, selectedProject } = useContext(AppContext);
+const Variability = (user, projectIndex) => {
+    axios
+        .put("/create_var_diagram/", {
+            data: {
+                user_id: user.uid,
+                project_index: projectIndex,
+            },
+        })
+        .then((res) => {
+            console.log(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
-    useEffect(() => {
-        const fetchData = async () => {
-            console.log("Entre en la línea antes de res");
-            const res = await axios.put("/create_var_diagram/", {
-                data: {
-                    user_id: user.uid,
-                    project_index: selectedProject.projectIndex,
-                },
-            });
-        };
-
-        fetchData();
-    }, [user.uid, selectedProject.projectIndex]);
-
-    return <div></div>;
-}
+    return null;
+};
 
 export default Variability;
 

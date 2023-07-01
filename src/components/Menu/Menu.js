@@ -122,7 +122,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        Variability(user, setSelectedProject);
+                        Variability(user, projectIndex);
                         handleClose();
                     }}
                 >
