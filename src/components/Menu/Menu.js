@@ -110,7 +110,6 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 >
                     Eliminar Arquitectura
                 </MenuItem>
-                <Divider className="dividerMenu" />
                 <MenuItem
                     disabled={item.architectures ? false : true}
                     onClick={() => {
@@ -118,8 +117,9 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                         handleClose();
                     }}
                 >
-                    Mostrar diagrama UML
+                    Diagrama UML de la Arquitectura
                 </MenuItem>
+                <Divider className="dividerMenu" />
                 <MenuItem
                     onClick={() => {
                         Variability(user, projectIndex);
@@ -127,6 +127,14 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                     }}
                 >
                     Mostrar variabilidad
+                </MenuItem>
+                <MenuItem
+                    onClick={() => {
+                        /*Variability(user, projectIndex);*/
+                        handleClose();
+                    }}
+                >
+                    Diagrama de Componentes
                 </MenuItem>
                 <Divider className="dividerMenu" />
                 <MenuItem
