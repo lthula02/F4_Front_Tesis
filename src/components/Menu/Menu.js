@@ -1,14 +1,9 @@
 // @ts-nocheck
 import React, { useContext, useState } from "react";
 import AppContext from "../../auth/context/context";
-import {
-    manageEditProject,
-    manageDeleteProject,
-} from "../../helpers/projects/projects";
-import {
-    manageEditArchitecture,
-    manageDeleteArchitecture,
-} from "../../helpers/architecture/architecture";
+import { manageEditProject, manageDeleteProject } from "../../helpers/projects/projects";
+import { manageEditArchitecture, manageDeleteArchitecture } from "../../helpers/architecture/architecture";
+import ComponentDiagram from "../ComponentDiagram/ComponentDiagram";
 import Variability from "../Variability/Variability";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -22,11 +17,9 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
  * arquitecturas y proyectos
  */
 const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
-    const { user, setSelectedProject, setReloadSidebar } =
-        useContext(AppContext);
+    const { user, selectedProject, setSelectedProject, setReloadSidebar } = useContext(AppContext);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const openMenu = Boolean(anchorEl);
-    //const [showVarComponent, setShowVarComponent] = useState(false);
 
     /**
      * Manejador de click sobre icon
@@ -44,10 +37,6 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    /*const handleVarClick = () => {
-        setShowVarComponent(true);
-    };*/
 
     return (
         <>
@@ -130,7 +119,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        /*Variability(user, projectIndex);*/
+                        ComponentDiagram(user, selectedProject);
                         handleClose();
                     }}
                 >
@@ -139,12 +128,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 <Divider className="dividerMenu" />
                 <MenuItem
                     onClick={() => {
-                        manageEditProject(
-                            user,
-                            item.name,
-                            projectIndex,
-                            setReloadSidebar
-                        );
+                        manageEditProject(user, item.name, projectIndex, setReloadSidebar);
                         handleClose();
                     }}
                 >
@@ -152,13 +136,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        manageDeleteProject(
-                            user,
-                            item.name,
-                            projectIndex,
-                            setSelectedProject,
-                            setReloadSidebar
-                        );
+                        manageDeleteProject(user, item.name, projectIndex, setSelectedProject, setReloadSidebar);
                         handleClose();
                     }}
                 >
