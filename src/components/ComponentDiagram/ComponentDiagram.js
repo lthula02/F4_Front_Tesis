@@ -1,13 +1,11 @@
 import axios from "axios";
 
-const ComponentDiagram = (user, selectedProject) => {
+const ComponentDiagram = (user, projectIndex) => {
     axios
         .put("/create_comp_diagram/", {
             data: {
                 user_id: user.uid,
-                project_index: selectedProject.projectIndex,
-                arch_index: selectedProject.arcIndex,
-                ver_index: selectedProject.verIndex,
+                project_index: projectIndex,
             },
         })
         .then((res) => {

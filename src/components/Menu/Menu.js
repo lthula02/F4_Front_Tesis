@@ -119,7 +119,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        ComponentDiagram(user, selectedProject);
+                        ComponentDiagram(user, projectIndex);
                         handleClose();
                     }}
                 >
