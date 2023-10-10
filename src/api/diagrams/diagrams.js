@@ -6,7 +6,7 @@ import axios from "axios";
  * @param user referencia al usuario que está utilizando el proyecto
  * @param projectIndex referencia al índice del proyecto seleccionado
  */
-const ComponentDiagram = (user, projectIndex) => {
+const ManageComponentDiagram = (user, projectIndex) => {
     axios
         .put("/create_comp_diagram/", {
             data: {
@@ -28,7 +28,7 @@ const ComponentDiagram = (user, projectIndex) => {
  * Llamada al Backend
  * Se encarga de generar el diagrama de variabilidad del proyecto
  */
-const Variability = (user, projectIndex) => {
+const ManageVariability = (user, projectIndex) => {
     axios
         .put("/create_var_diagram/", {
             data: {
@@ -46,4 +46,4 @@ const Variability = (user, projectIndex) => {
     return null;
 };
 
-export { ComponentDiagram, Variability };
+export { ManageComponentDiagram, ManageVariability };

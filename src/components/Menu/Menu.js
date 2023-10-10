@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import AppContext from "../../auth/context/context";
 import { manageEditProject, manageDeleteProject } from "../../helpers/projects/projects";
 import { manageEditArchitecture, manageDeleteArchitecture } from "../../helpers/architecture/architecture";
-import { ComponentDiagram, Variability } from "../../api/diagrams/diagrams";
+import { ManageComponentDiagram, ManageVariability } from "../../api/diagrams/diagrams";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
@@ -110,7 +110,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 <Divider className="dividerMenu" />
                 <MenuItem
                     onClick={() => {
-                        Variability(user, projectIndex);
+                        ManageVariability(user, projectIndex);
                         handleClose();
                     }}
                 >
@@ -118,7 +118,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        ComponentDiagram(user, projectIndex);
+                        ManageComponentDiagram(user, projectIndex);
                         handleClose();
                     }}
                 >
