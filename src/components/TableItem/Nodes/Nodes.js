@@ -161,6 +161,7 @@ const NodesTable = (props) => {
         const thisRow = {};
         let id = "";
         let options = {};
+        options["-"] = "-";
 
         api.getAllColumns()
             .filter((c) => c.field !== "__check__" && !!c)
