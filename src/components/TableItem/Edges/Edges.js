@@ -114,6 +114,50 @@ const EdgesTable = () => {
             <div className="form-wrapper">
                 <form className="form-styles">
                     <div className="input">
+                        <div className="buttons">
+                            {!loadingMetrics ? (
+                                <Button
+                                    className="btn-total"
+                                    onClick={async () => {
+                                        setLoadingMetrics(true);
+                                        calculateTotal();
+                                        await ManageMetrics(user, selectedProject, umbralName);
+                                        setEnable(false);
+                                        setLoadingMetrics(false);
+                                    }}
+                                >
+                                    Calcular Metricas
+                                </Button>
+                            ) : (
+                                <Loader />
+                            )}
+                            {!loadingComponents ? (
+                                <Button
+                                    className="btn-total"
+                                    disabled={enable}
+                                    onClick={async () => {
+                                        setLoadingComponents(true);
+                                        await combineMetrics(setRender, render);
+                                        await calculatelistas();
+                                        // await axios.put('/create_cc_board/', {
+                                        //  data: {
+                                        //   user_id: user.uid,
+                                        //   project_index: selectedProject.projectIndex,
+                                        //   arch_index: selectedProject.arcIndex,
+                                        //   ver_index: selectedProject.verIndex,
+                                        //  }
+
+                                        // });
+                                        setEnable(true);
+                                        setLoadingComponents(false);
+                                    }}
+                                >
+                                    Unir Componentes
+                                </Button>
+                            ) : (
+                                <Loader />
+                            )}
+                        </div>
                         <div className="input-align">
                             <input
                                 value={dms}
@@ -198,50 +242,6 @@ const EdgesTable = () => {
                             />
                             <label className="input-label">Umbral Q</label>
                         </div>
-                    </div>
-                    <div className="buttons">
-                        {!loadingMetrics ? (
-                            <Button
-                                className="btn-total"
-                                onClick={async () => {
-                                    setLoadingMetrics(true);
-                                    calculateTotal();
-                                    await ManageMetrics(user, selectedProject, umbralName);
-                                    setEnable(false);
-                                    setLoadingMetrics(false);
-                                }}
-                            >
-                                Calcular Metricas
-                            </Button>
-                        ) : (
-                            <Loader />
-                        )}
-                        {!loadingComponents ? (
-                            <Button
-                                className="btn-total"
-                                disabled={enable}
-                                onClick={async () => {
-                                    setLoadingComponents(true);
-                                    await combineMetrics(setRender, render);
-                                    await calculatelistas();
-                                    // await axios.put('/create_cc_board/', {
-                                    //  data: {
-                                    //   user_id: user.uid,
-                                    //   project_index: selectedProject.projectIndex,
-                                    //   arch_index: selectedProject.arcIndex,
-                                    //   ver_index: selectedProject.verIndex,
-                                    //  }
-
-                                    // });
-                                    setEnable(true);
-                                    setLoadingComponents(false);
-                                }}
-                            >
-                                Unir Componentes
-                            </Button>
-                        ) : (
-                            <Loader />
-                        )}
                     </div>
                 </form>
             </div>

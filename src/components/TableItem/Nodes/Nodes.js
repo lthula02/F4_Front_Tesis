@@ -41,20 +41,13 @@ const NodesTable = (props) => {
     });
 
     const columns = [
-        { field: "name", headerName: "Nombre", width: 230 },
-        { field: "isInterface", headerName: "Es Interfaz?", width: 160 },
-        { field: "isAbstract", headerName: "Es Abstracto?", width: 160 },
-        { field: "module", headerName: "Modulo", width: 130 },
-        {
-            field: "incomompleteProperties",
-            headerName: "Propiedades Completas",
-            width: 230,
-        },
-        { field: "description", headerName: "Descripcion", width: 160 },
+        { field: "name", headerName: "Nombre", width: 240 },
+        { field: "description", headerName: "Funcionalidad", width: 240 },
         {
             field: "change_desc",
-            headerName: "Cambiar Descripcion",
-            width: 230,
+            headerName: "Cambiar funcionalidad",
+            sortable: false,
+            width: 120,
             renderCell: (params) => {
                 return (
                     <>
@@ -72,12 +65,12 @@ const NodesTable = (props) => {
                 );
             },
         },
-        { field: "composite", headerName: "Componente Compuesto", width: 235 },
+        { field: "composite", headerName: "Componente Compuesto", width: 240 },
         {
             field: "action",
             headerName: "Cambiar el Nodo de Componente Compuesto",
             sortable: false,
-            width: 150,
+            width: 120,
             renderCell: (params) => {
                 return (
                     <>
@@ -95,10 +88,17 @@ const NodesTable = (props) => {
                 );
             },
         },
+        { field: "isInterface", headerName: "Es Interfaz?", width: 180 },
+        { field: "isAbstract", headerName: "Es Abstracto?", width: 180 },
+        { field: "module", headerName: "Modulo", width: 180 },
+        {
+            field: "incomompleteProperties",
+            headerName: "Propiedades Completas",
+            width: 230,
+        },
     ];
 
     const onClick = async (e, params) => {
-        //attribute especifica si se está cambiando descripción ('desc') o componente compuesto ('cc')
         e.stopPropagation(); // don't select this row after clicking
 
         const api = params.api;
@@ -114,7 +114,7 @@ const NodesTable = (props) => {
                 if (c.field == "name") {
                     node_id = params.getValue(params.id, c.field);
                 } else if (c.field == "description") {
-                    txtTitle = "Inserte la descripción de " + node_id;
+                    txtTitle = "Inserte la funcionalidad de " + node_id;
                 }
             });
 

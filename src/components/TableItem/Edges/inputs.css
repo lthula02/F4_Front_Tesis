@@ -18,6 +18,7 @@
 .input {
   display: flex;
   margin: 0 0.5rem 0 0;
+  column-gap: 1rem;
 }
 
 .input-styles {
@@ -41,7 +42,6 @@
 }
 
 .input-align {
-  margin-right: 1rem;
   position: relative;
   width: 140px;
   height: 40px;
@@ -54,9 +54,8 @@
 }
 
 .input-align-umbral {
-  margin-right: 1rem;
   position: relative;
-  width: 100px;
+  width: 140px;
   height: 40px;
   display: flex;
   flex-direction: column-reverse;

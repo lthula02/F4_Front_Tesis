@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Swal from "sweetalert2";
 
 /**
  * Componente que representa al
@@ -35,6 +36,31 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
      */
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const swalDiagram = async (type) => {
+        const diagram = type;
+        return Swal.fire({
+            title: "Descargar PDF",
+            html: "Se guardará el archivo .pdf en<br>'C:TESISBEHRENSBRICENO'",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Descargar",
+            cancelButtonText: "Cancelar",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                if (diagram == "components") {
+                    ManageComponentDiagram(user, projectIndex);
+                    Swal.fire("Descargado!", "El diagrama de componentes ha sido descargado", "success");
+                }
+                if (diagram == "variability") {
+                    ManageVariability(user, projectIndex);
+                    Swal.fire("Descargado!", "El diagrama de variabilidad ha sido descargado", "success");
+                }
+            }
+        });
     };
 
     return (
@@ -110,7 +136,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 <Divider className="dividerMenu" />
                 <MenuItem
                     onClick={() => {
-                        ManageVariability(user, projectIndex);
+                        swalDiagram("variability");
                         handleClose();
                     }}
                 >
@@ -118,7 +144,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        ManageComponentDiagram(user, projectIndex);
+                        swalDiagram("components");
                         handleClose();
                     }}
                 >
