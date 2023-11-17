@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import AppContext from "../../auth/context/context";
 import { manageEditProject, manageDeleteProject } from "../../helpers/projects/projects";
 import { manageEditArchitecture, manageDeleteArchitecture } from "../../helpers/architecture/architecture";
-import { ManageComponentDiagram, ManageVariability } from "../../api/diagrams/diagrams";
+import { ManageClassDiagram, ManageComponentDiagram, ManageVariability } from "../../api/diagrams/diagrams";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
@@ -15,6 +15,8 @@ import Swal from "sweetalert2";
  * Componente que representa al
  * menu popup para manejo de
  * arquitecturas y proyectos
+ *
+ * setShowUML fue un método realizado por la tercera fase del proyecto, si desea probarlo intercambiar: swalDiagram("class") en línea 136 por setShowUML(true)
  */
 const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
     const { user, selectedProject, setSelectedProject, setReloadSidebar } = useContext(AppContext);
@@ -51,6 +53,10 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
             cancelButtonText: "Cancelar",
         }).then(async (result) => {
             if (result.isConfirmed) {
+                if (diagram == "class") {
+                    ManageClassDiagram(user, selectedProject);
+                    Swal.fire("Descargado!", "El diagrama de clases ha sido descargado", "success");
+                }
                 if (diagram == "components") {
                     ManageComponentDiagram(user, projectIndex);
                     Swal.fire("Descargado!", "El diagrama de componentes ha sido descargado", "success");
@@ -127,7 +133,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 <MenuItem
                     disabled={item.architectures ? false : true}
                     onClick={() => {
-                        setShowUml(true);
+                        swalDiagram("class");
                         handleClose();
                     }}
                 >
