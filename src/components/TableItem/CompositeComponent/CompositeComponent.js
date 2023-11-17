@@ -1,29 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
-import {
-    DataGrid,
-    GridToolbar,
-    GridToolbarContainer,
-    GridToolbarColumnsButton,
-    GridToolbarFilterButton,
-    GridToolbarDensitySelector,
-} from "@mui/x-data-grid";
+import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton } from "@mui/x-data-grid";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/EditOutlined";
-import AddIcon from "@material-ui/icons/Add";
 import Swal from "sweetalert2";
-import Box from "@mui/material/Box";
-import PropTypes from "prop-types";
-
 import AppContext from "../../../auth/context/context";
 import Loader from "../../Loader/Loader";
 import nodeHelper from "../../../helpers/nodes/nodes";
 import axios from "axios";
-import { postUpdatedElements } from "../../../api/elements/elements";
-import {
-    manageElementsUpdate,
-    manageUpdatedResponse,
-} from "../../../helpers/elements/elements";
-import Link from "@mui/material/Link";
+import { ManageCreateCCBoard, ManageEditCCDescription, postUpdatedElements } from "../../../api/elements/elements";
+import { manageElementsUpdate, manageUpdatedResponse } from "../../../helpers/elements/elements";
 import { Button } from "@material-ui/core";
 
 /**
@@ -55,15 +40,9 @@ const CompositeComponentTable = (props) => {
                 id: index,
                 name: list.name ? list.name : "-",
                 color: list.bg ? list.bg : "-",
-                nodes: list.composite_component
-                    ? list.composite_component.join(" ")
-                    : "-",
-                required_interface: list.required_interfaces
-                    ? list.required_interfaces
-                    : "-",
-                provided_interface: list.provided_interfaces
-                    ? list.provided_interfaces
-                    : "-",
+                nodes: list.composite_component ? list.composite_component.join(" ") : "-",
+                required_interface: list.required_interfaces ? list.required_interfaces : "-",
+                provided_interface: list.provided_interfaces ? list.provided_interfaces : "-",
                 description: list.description ? list.description : "-",
             };
         }) || [];
@@ -79,10 +58,7 @@ const CompositeComponentTable = (props) => {
                     <>
                         <Button
                             style={{
-                                backgroundColor: params.getValue(
-                                    params.id,
-                                    "color"
-                                ),
+                                backgroundColor: params.getValue(params.id, "color"),
                             }}
                         />
                     </>
@@ -157,21 +133,8 @@ const CompositeComponentTable = (props) => {
             confirmButtonText: "Guardar",
             showLoaderOnConfirm: true,
             preConfirm: async (description) => {
-                //console.log("description");
-                //console.log(description);
-
-                const res = await axios.put("/edit_cc_description/", {
-                    data: {
-                        user_id: user.uid,
-                        project_index: selectedProject.projectIndex,
-                        arch_index: selectedProject.arcIndex,
-                        ver_index: selectedProject.verIndex,
-                        name: name,
-                        description: description,
-                    },
-                });
-
-                return res.data;
+                const res = await ManageEditCCDescription(user, selectedProject, name, description);
+                return res;
             },
             allowOutsideClick: () => !Swal.isLoading(),
         }).then(async (result) => {
@@ -183,19 +146,12 @@ const CompositeComponentTable = (props) => {
                     formData.append("user_id", user.uid);
                     formData.append("ver_index", selectedProject.verIndex);
                     formData.append("arc_index", selectedProject.arcIndex);
-                    formData.append(
-                        "project_index",
-                        selectedProject.projectIndex
-                    );
+                    formData.append("project_index", selectedProject.projectIndex);
 
                     const response = await postUpdatedElements(formData);
                     //console.log('responseeeeeee');
                     //console.log(response);
-                    manageUpdatedResponse(
-                        response,
-                        selectedProject,
-                        setSelectedProject
-                    );
+                    manageUpdatedResponse(response, selectedProject, setSelectedProject);
 
                     Swal.fire("Cambiado con éxito!", "", "success");
                 }
@@ -210,16 +166,8 @@ const CompositeComponentTable = (props) => {
     function CustomToolbar() {
         return (
             <GridToolbarContainer>
-                <GridToolbarColumnsButton
-                    onResize={undefined}
-                    nonce={undefined}
-                    onResizeCapture={undefined}
-                />
-                <GridToolbarFilterButton
-                    nonce={undefined}
-                    onResize={undefined}
-                    onResizeCapture={undefined}
-                />
+                <GridToolbarColumnsButton onResize={undefined} nonce={undefined} onResizeCapture={undefined} />
+                <GridToolbarFilterButton nonce={undefined} onResize={undefined} onResizeCapture={undefined} />
             </GridToolbarContainer>
         );
     }
@@ -232,14 +180,7 @@ const CompositeComponentTable = (props) => {
                         className="btn-total"
                         onClick={async () => {
                             setLoadingComponents(true);
-                            await axios.put("/create_cc_board/", {
-                                data: {
-                                    user_id: user.uid,
-                                    project_index: selectedProject.projectIndex,
-                                    arch_index: selectedProject.arcIndex,
-                                    ver_index: selectedProject.verIndex,
-                                },
-                            });
+                            await ManageCreateCCBoard(user, selectedProject);
                             setRender(!render);
                             setLoadingComponents(false);
                         }}
@@ -258,18 +199,15 @@ const CompositeComponentTable = (props) => {
                         getRowHeight={() => "auto"}
                         components={{ Toolbar: CustomToolbar }}
                         sx={{
-                            "&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell":
-                                {
-                                    py: 1,
-                                },
-                            "&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell":
-                                {
-                                    py: "15px",
-                                },
-                            "&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell":
-                                {
-                                    py: "22px",
-                                },
+                            "&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell": {
+                                py: 1,
+                            },
+                            "&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell": {
+                                py: "15px",
+                            },
+                            "&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell": {
+                                py: "22px",
+                            },
                         }}
                         columns={columns}
                         pageSize={50}
@@ -284,12 +222,7 @@ const CompositeComponentTable = (props) => {
                         }}
                         onColumnHeaderClick={(param) => {
                             if (param.field === "__check__") {
-                                nodeHelper.manageCheckSelection(
-                                    selectedNodes,
-                                    setSelectedNodes,
-                                    cy,
-                                    setSelectionModel
-                                );
+                                nodeHelper.manageCheckSelection(selectedNodes, setSelectedNodes, cy, setSelectionModel);
                             }
                         }}
                         selectionModel={selectionModel}

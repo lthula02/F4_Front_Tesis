@@ -3,18 +3,20 @@ import React, { useContext, useState } from "react";
 import AppContext from "../../auth/context/context";
 import { manageEditProject, manageDeleteProject } from "../../helpers/projects/projects";
 import { manageEditArchitecture, manageDeleteArchitecture } from "../../helpers/architecture/architecture";
-import ComponentDiagram from "../ComponentDiagram/ComponentDiagram";
-import Variability from "../Variability/Variability";
+import { ManageClassDiagram, ManageComponentDiagram, ManageVariability } from "../../api/diagrams/diagrams";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Swal from "sweetalert2";
 
 /**
  * Componente que representa al
  * menu popup para manejo de
  * arquitecturas y proyectos
+ *
+ * setShowUML fue un método realizado por la tercera fase del proyecto, si desea probarlo intercambiar: swalDiagram("class") en línea 136 por setShowUML(true)
  */
 const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
     const { user, selectedProject, setSelectedProject, setReloadSidebar } = useContext(AppContext);
@@ -36,6 +38,35 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
      */
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const swalDiagram = async (type) => {
+        const diagram = type;
+        return Swal.fire({
+            title: "Descargar PDF",
+            html: "Se guardará el archivo .pdf en<br>'C:TESISBEHRENSBRICENO'",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Descargar",
+            cancelButtonText: "Cancelar",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                if (diagram == "class") {
+                    ManageClassDiagram(user, selectedProject);
+                    Swal.fire("Descargado!", "El diagrama de clases ha sido descargado", "success");
+                }
+                if (diagram == "components") {
+                    ManageComponentDiagram(user, projectIndex);
+                    Swal.fire("Descargado!", "El diagrama de componentes ha sido descargado", "success");
+                }
+                if (diagram == "variability") {
+                    ManageVariability(user, projectIndex);
+                    Swal.fire("Descargado!", "El diagrama de variabilidad ha sido descargado", "success");
+                }
+            }
+        });
     };
 
     return (
@@ -102,7 +133,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 <MenuItem
                     disabled={item.architectures ? false : true}
                     onClick={() => {
-                        setShowUml(true);
+                        swalDiagram("class");
                         handleClose();
                     }}
                 >
@@ -111,7 +142,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 <Divider className="dividerMenu" />
                 <MenuItem
                     onClick={() => {
-                        Variability(user, projectIndex);
+                        swalDiagram("variability");
                         handleClose();
                     }}
                 >
@@ -119,7 +150,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        ComponentDiagram(user, projectIndex);
+                        swalDiagram("components");
                         handleClose();
                     }}
                 >
