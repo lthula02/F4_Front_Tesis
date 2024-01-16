@@ -42,9 +42,9 @@ Una vez realizado estos pasos podrá visualizar el grafo de la arquitectura. A c
 8. Documentar la funcionalidad de cada Nodo en la tabla *Nodos*
 9. Dar un nombre de aspecto a cada Componente Compuesto (opcional), el programa tomará el ID como predeterminado, el aspecto debe indicar la función general del componente, de forma que ayude en la comprensión de la arquitectura
 10. Haga clic en los 3 puntos dentro del recuadro blanco de su proyecto (a la izquierda de la página), y seleccione cualquiera de las siguientes opciones:
-- Diagrama UML de la Arquitectura: descarga el UML de la arquitectura seleccionada, *no se descargará si no está visualizando ninguna de sus arquitecturas en el proyecto*
-- Mostrar variabilidad: descarga el diagrama de variabilidad del proyecto completo. Indica la funcionalidad de cada nodo dentro de los aspectos en el dominio y cómo cambian de enfoque entre arquitecturas.
-- Diagrama de componentes: descarga el diagrama de componentes del proyecto. Muestra la relación entre los aspectos (dependencias) y la frecuencia con la que aparece cada uno en las arquitecturas estudiadas
+    - Diagrama UML de la Arquitectura: descarga el UML de la arquitectura seleccionada, *no se descargará si no está visualizando ninguna de sus arquitecturas en el proyecto*
+    - Mostrar variabilidad: descarga el diagrama de variabilidad del proyecto completo. Indica la funcionalidad de cada nodo dentro de los aspectos en el dominio y cómo cambian de enfoque entre arquitecturas.
+    - Diagrama de componentes: descarga el diagrama de componentes del proyecto. Muestra la relación entre los aspectos (dependencias) y la frecuencia con la que aparece cada uno en las arquitecturas estudiadas
 
 **La eficacia de los resultados obtenidos dependerá en gran medida de la competencia del usuario y el conocimiento que posea acerca de las arquitecturas estudiadas**
 
