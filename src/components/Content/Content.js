@@ -23,7 +23,6 @@ const Content = () => {
   const [checked, setChecked] = useState(false);
   const [elementos, setElementos] = useState();
   const [load, setLoad] = useState(false);
-  const [composite2, setComposite2] = useState(false);
   const [listT, setListT] = useState({nodes: ''});
   const {
     selectedProject,
@@ -212,18 +211,6 @@ const Content = () => {
     }
   }, [checked, cy]);
 
-  // useEffect(() => {
-  //   console.log("ENTRO")
-  //   if (composite) {
-  //     let composite_components = []
-  //     elementos.list_t.map((item) => {
-  //       composite_components.push(item.composite_component);
-  //     });
-  //     setListT(composite_components);
-  //     setComposite2(true)
-  //   }
-  // }, [composite]);
-
   useEffect(()=>{
 
   },[composite])
@@ -275,21 +262,6 @@ const Content = () => {
           />
         </div>
       )
-      // : elementos && composite2 ? (
-      //   <CytoscapeComponent
-      //       className="component"
-      //       cy={(cyt) => {
-      //         setCy(cyt);
-      //       }}
-      //       elements={CytoscapeComponent.normalizeElements(elementos)}
-      //       id="component"
-      //       layout={state.layout2}
-      //       maxZoom={2}
-      //       pan={{ x: 150, y: 30 }}
-      //       stylesheet={state.stylesheet2}
-      //       zoom={0.5}
-      //     />
-      // )
       : null }
     </>
   );

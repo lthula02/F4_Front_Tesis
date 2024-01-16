@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import clsx from "clsx";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { manageCreateVersion, manageDeleteVersion, manageEditVersion } from "../../helpers/versions/versions";
 import { downloadGraph } from "../../helpers/content/downloader";
 

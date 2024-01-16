@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+# Frontend - Trabajo de Grado
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Universidad Metropolitana**
+Título: Subsistema para el análisis de variabilidad como mecanismo para el diseño de arquitecturas de referencia
+Autores: [Christian Behrens](https://github.com/cbehrensunimet) y [Nicolás Briceño](https://github.com/nicoabb)
 
-## Available Scripts
+## Cómo comenzar
 
-In the project directory, you can run:
+`npm install --legacy-peer-deps`
+`npm run dev`
 
-### `yarn start`
+El proyecto es el cuarto paso de una fase de investigación, explicado más adelante, debido a las tecnologías utilizadas y el tiempo transcurrido entre el primer paso y este último existen múltiples dependencias desactualizadas/obsoletas. De ahí que se recomienda el uso del '--legacy-peer-deps' para poder probar el proyecto, ya fueron dadas las recomendaciones para un futuro trabajo encargado de actualizar y reparar el código.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Nota: se debe estar corriendo frontend y backend para que funcione el proyecto, ya que la información se guarda en la cuenta de Google enlazada**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### [Repositorio del Backend](https://github.com/nicoabb/F4_Back_Tesis)
 
-### `yarn test`
+## Contexto de la aplicación desarrollada
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+La investigación *Estudio de la ingeniería inversa en el contexto de generación de arquitecturas referenciales*, busca diseñar una metodología para la generación de arquitecturas de referencia, a partir de la aplicación de procedimientos propios de la ingeniería inversa (Guillén et al., 2020). Esta investigación se desarrolla en tres etapas: la primera etapa implica un estudio exhaustivo del estado del arte; la segunda etapa se centra en el diseño y construcción de un prototipo de herramienta; y la tercera y última etapa se dedica a la validación del método propuesto.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+La presente investigación corresponde a la segunda etapa, que se divide en cuatro actividades. Esta es la cuarta y última actividad. El trabajo previo incluyó, en primer lugar, la construcción de la arquitectura global del prototipo y la generación de un grafo como resultado del análisis del código fuente del sistema a analizar (Cafarelli y Mariña, 2021). En segundo lugar, se desarrolló un subsistema para la identificación de componentes conceptuales mediante la aplicación de métricas (D’Lacoste y Perez, 2022). Finalmente, como tercera actividad, se desarrolló un subsistema para la reconstrucción de la arquitectura de un sistema (González y Rodríguez, 2023). Tomando como entrada las arquitecturas generadas en la tercera actividad, **este trabajo realiza el análisis de variabilidad para generar una arquitectura de referencia**, cerrando así, la etapa de diseño y construcción del prototipo de software.

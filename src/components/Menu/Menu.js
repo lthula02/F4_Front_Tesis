@@ -20,7 +20,7 @@ import Swal from "sweetalert2";
  */
 const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
     const { user, selectedProject, setSelectedProject, setReloadSidebar } = useContext(AppContext);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
 
     /**

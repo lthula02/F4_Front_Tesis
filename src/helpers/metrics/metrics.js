@@ -1,15 +1,8 @@
-import React, { useContext } from "react";
 import {
   putMetrics,
   combineMetrics,
   compositeComponents,
 } from '../../api/metrics/metrics.js';
-
-import AppContext from "../../auth/context/context.js"
-import { ModalMessage } from "../../components/ModalMessage/ModalMessage";
-
-
-
 
 const ManageMetrics = async (user, selectedProject, umbralName) => {
     // setReloadSidebar(true);

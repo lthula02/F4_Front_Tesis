@@ -6,7 +6,6 @@ import { registerLicense } from '@syncfusion/ej2-base';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./screens/Home/Home";
-import Vista from './components/UML/UML';
 
 import AppContext from "./auth/context/context";
 

@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import AppContext from "../../../auth/context/context";
 import Loader from "../../Loader/Loader";
 import nodeHelper from "../../../helpers/nodes/nodes";
-import axios from "axios";
 import { ManageCreateCCBoard, ManageEditCCDescription, postUpdatedElements } from "../../../api/elements/elements";
 import { manageElementsUpdate, manageUpdatedResponse } from "../../../helpers/elements/elements";
 import { Button } from "@material-ui/core";
