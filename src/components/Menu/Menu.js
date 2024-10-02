@@ -44,7 +44,7 @@ const StyledMenu = ({ item, projectIndex, setOpen, setShowUml }) => {
         const diagram = type;
         return Swal.fire({
             title: "Descargar PDF",
-            html: "Se guardará el archivo .pdf en<br>'C:TESISBEHRENSBRICENO'",
+            html: "Se guardará el archivo .pdf en<br>'C:TESISFINAL'",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

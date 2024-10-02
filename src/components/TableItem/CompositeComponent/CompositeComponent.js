@@ -137,7 +137,6 @@ const CompositeComponentTable = (props) => {
             },
             allowOutsideClick: () => !Swal.isLoading(),
         }).then(async (result) => {
-            //console.log('result');
             //console.log(result);
             if (result.isConfirmed) {
                 if (result.value.ok) {
@@ -148,8 +147,7 @@ const CompositeComponentTable = (props) => {
                     formData.append("project_index", selectedProject.projectIndex);
 
                     const response = await postUpdatedElements(formData);
-                    //console.log('responseeeeeee');
-                    //console.log(response);
+                    // console.log(response);
                     manageUpdatedResponse(response, selectedProject, setSelectedProject);
 
                     Swal.fire("Cambiado con éxito!", "", "success");
@@ -172,6 +170,7 @@ const CompositeComponentTable = (props) => {
     }
 
     return (
+        
         <>
             <div>
                 {!loadingComponents ? (
